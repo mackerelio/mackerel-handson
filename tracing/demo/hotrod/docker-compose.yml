@@ -2,7 +2,7 @@
 # Mackerelのトレースにのみ送出します。イメージはDocker Hubに配置しています
 services:
   hotrod1:
-    image: ${REGISTRY:-}kenshimuto/hotrod:latest
+    image: ghcr.io/kmuto/hotrod:latest
     ports:
       - "127.0.0.1:8080:8080"
     command: ["all", "-S", "-m", "<p>注目するのはリクエストから配車に至るlatencyの値です。同じボタンを連打したときにlatencyが伸びていくのを確認し、トレースを見てみましょう。</p>"]
@@ -12,7 +12,7 @@ services:
       - hotrod-example
 
   hotrod2:
-    image: ${REGISTRY:-}kenshimuto/hotrod:latest
+    image: ghcr.io/kmuto/hotrod:latest
     ports:
       - "127.0.0.1:8081:8080"
     command: ["all", "-S", "-M", "-m", "<p>DBへのアクセスを改善したので連打してもlatency値は変わらなくなっています。さらにlatencyを下げるために何ができるでしょうか。トレースを見てみましょう。</p>"]
@@ -22,7 +22,7 @@ services:
       - hotrod-example
 
   hotrod3:
-    image: ${REGISTRY:-}kenshimuto/hotrod:latest
+    image: ghcr.io/kmuto/hotrod:latest
     ports:
       - "127.0.0.1:8082:8080"
     command: ["all", "-S", "-M", "-D", "100ms", "-W", "100", "-m", "<p>ルート検索の並列性を上げ、待ち時間を短縮しました。トレースを見てみましょう。</p>"]
@@ -32,7 +32,7 @@ services:
       - hotrod-example
 
   hotrod4:
-    image: ${REGISTRY:-}kenshimuto/hotrod:latest
+    image: ghcr.io/kmuto/hotrod:latest
     ports:
       - "127.0.0.1:8083:8080"
     command: ["all", "-S", "-M", "-D", "100ms", "-W", "100", "-L", "15", "-m", "<p>最後に、特定処理で障害を発生させてみます。何度かクリックしていると、詰まるような動作が発生します。ときには結果が返ってこないこともあります。トレースツール側で調べてみましょう。</p>"]
@@ -42,7 +42,7 @@ services:
       - hotrod-example
 
   hotrod5:
-    image: ${REGISTRY:-}kenshimuto/hotrod:latest
+    image: ghcr.io/kmuto/hotrod:latest
     ports:
       - "127.0.0.1:8084:8080"
     command: ["all", "-m", "<p>デモの前に実行する用。Redis timeoutを持つトレースを記録します。</p>"]
@@ -52,7 +52,7 @@ services:
       - hotrod-example
 
   otel-collector:
-    image: otel/opentelemetry-collector-contrib:latest
+    image: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib:latest
     volumes:
       - ./otel-col-demo.yml:/etc/otelcol-contrib/config.yaml
     ports:
