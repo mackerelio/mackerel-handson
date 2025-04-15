@@ -21,7 +21,7 @@ services:
 
   db:
     container_name: sample-db
-    image: postgres
+    image: ghcr.io/cloudnative-pg/postgresql:latest
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -31,7 +31,7 @@ services:
 
   otel-collector:
     container_name: sample-otel-collector
-    image: otel/opentelemetry-collector-contrib:latest
+    image: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib:latest
     volumes:
       - ./otel-collector-config.yaml:/etc/otelcol-contrib/config.yaml
     ports:
