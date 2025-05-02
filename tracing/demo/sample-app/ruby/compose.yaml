@@ -8,26 +8,31 @@ services:
     volumes:
       - .:/app
     environment:
-      DATABASE_USERNAME: postgres
-      DATABASE_PASSWORD: postgres
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: mysql
       DATABASE_HOST: db
       OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector:4319"
       OTEL_SERVICE_NAME: "otel-sample-app"
     depends_on:
-      - db
-      - otel-collector
+      db:
+        condition: service_healthy
+      otel-collector:
+        condition: service_started
     networks:
       - sample-app
 
   db:
     container_name: sample-db
-    image: ghcr.io/cloudnative-pg/postgresql:latest
+    image: public.ecr.aws/docker/library/mysql:latest
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: otel-sample
+      MYSQL_ROOT_PASSWORD: mysql
     networks:
       - sample-app
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 2s
+      timeout: 1s
+      retries: 5
 
   otel-collector:
     container_name: sample-otel-collector

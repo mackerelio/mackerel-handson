@@ -9,6 +9,6 @@ end
     name: Faker::Commerce.product_name,
     description: Faker::Lorem.sentence,
     price: Faker::Commerce.price,
-    category: Category.order('RANDOM()').first
+    category: Category.order('RAND()').first
   )
 end
