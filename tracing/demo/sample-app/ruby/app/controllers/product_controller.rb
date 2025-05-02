@@ -13,7 +13,7 @@ class ProductController < ApplicationController
     results = products.map do |product|
       {
         product: product.name,
-        prirce: product.price,
+        price: product.price,
         description: product.description,
         category: product.category.name,
       }

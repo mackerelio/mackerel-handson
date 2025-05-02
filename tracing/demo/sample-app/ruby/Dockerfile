@@ -1,6 +1,6 @@
-FROM ruby:3.4.1-slim
+FROM ruby:3.4.2-slim
 
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev
+RUN apt-get update -qq && apt-get install -y build-essential libmariadb-dev-compat libmariadb-dev libyaml-dev
 
 WORKDIR /app
 
