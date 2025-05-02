@@ -1,5 +1,7 @@
 [←目次へ戻る](../README.md)
 
+[⇥準備をスキップして「分散トレーシングとは」へ進む](../03-distributedtracing/README.md)
+
 # このハンズオンを始める前の準備
 
 ようこそ！ このハンズオンでは、皆さんのコンピュータ上に構築した仮想環境コンテナでアプリケーションを動かし、アプリケーションから得られたOpenTelemetryトレースシグナルをオブザーバビリティプラットフォームの[Mackerel](https://ja.mackerel.io)に送って、解析することを体験します。
@@ -22,7 +24,7 @@ Windows環境の場合は、[Downloads](https://git-scm.com/downloads)から「S
 git --version
 ```
 
-正常にインストールされていれば、「`git version 2.48.1`」のようにバージョンが表示されます。
+正常にインストールされていれば、「`git version 2.49.0`」のようにバージョンが表示されます。
 
 `command not found`のようにエラーが出てしまった場合は、インストールした`git`コマンドへのパス設定がされているかなど確認してください。
 
@@ -65,7 +67,7 @@ Dockerがうまく動いているなら、以下のように「`Hello from Docke
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
 c9c5fd25a1bd: Pull complete
-Digest: sha256:d715f14f9eca81473d9112df50457893aa4d099adeb4729f679006bf5ea12407
+Digest: sha256:c41088499908a59aae84b0a49c70e86f4731e588a737f1637e73c8c09d995654
 Status: Downloaded newer image for hello-world:latest
 
 Hello from Docker!
@@ -80,13 +82,16 @@ For more examples and ideas, visit:
 
 `Unable to find image`はまだ手元にコンテナイメージ（アプリケーションなどを格納したテンプレート）がないのでダウンロードすることを示しています（もう一度実行してみると、ダウンロードはスキップされ、「`Hello from Docker!`」が表示されます）。
 
-`docker`はDockerの呼び出しコマンド、`run`は新たにコンテナを立てて実行する指示、`--rm`はコンテナの実行終了時にそのコンテナを削除するオプション、`hello-world`はコンテナの元となるコンテナイメージです。コンテナイメージは[Docker Hub](https://hub.docker.com/)というWebサイトからダウンロードされます。
+`docker`はDockerの呼び出しコマンド、`run`は新たにコンテナを立てて実行する指示、`--rm`はコンテナの実行終了時にそのコンテナを削除するオプション、`hello-world`はコンテナの元となるコンテナイメージです。コンテナイメージは[Docker Hub](https://hub.docker.com/)というWebサイトからダウンロードされています。
 
 > [!IMPORTANT]
 > `docker`コマンドおよびhello-worldコンテナが実行できることを確認できましたか？
 
 > [!NOTE]
 > ダウンロードしたコンテナイメージを手元から削除したいときには、`docker rmi hello-world`を実行します。
+
+> [!NOTE]
+> Docker Hub以外にもコンテナイメージの置き場所（レジストリ）は存在し、このハンズオンではDocker HubではなくGitHub Container Registry（ghcr.io）を利用しています。
 
 ## インターネットを介したトレースシグナルの送信許可
 
