@@ -21,7 +21,7 @@ if defined?(Rails::Server)
   OpenTelemetry::SDK.configure do |c|
     c.service_name = 'sample-app'
     c.use_all({
-      'OpenTelemetry::Instrumentation::PG' => { obfuscation_limit: 10000 },
+      'OpenTelemetry::Instrumentation::Mysql2' => { obfuscation_limit: 10000 },
     })
   end
 end
