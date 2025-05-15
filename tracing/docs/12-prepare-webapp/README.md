@@ -7,7 +7,7 @@
 以下の3つのコンテナが、コンテナ環境で立ち上がります。
 
 - sample-app: Ruby on Railsで書かれたWebアプリケーション
-- sample-db: データ保存先のPostgreSQL
+- sample-db: データ保存先のMySQL
 - sample-otel-collector: OpenTelemetry Collector
 
 HotRODの例と同様に、アプリケーションで計装されたトレースはOpenTelemetry Collectorで受信され、Mackerelに送信されます。
