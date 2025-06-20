@@ -13,12 +13,12 @@ Webコンソールの左サイドメニューの下部にある[新規ホスト�
 
 ![](./image01.png)
 
-Amazon Linux2の場合は以下のような内容をコピーします。（貸与しているハンズオンサーバーは`Amazon Linux2`となります）
+Rocky Linuxの場合は以下のような内容をコピーします。
 - コマンドの右端にあるクリップボードアイコンからコピーできます。
 - `<YOUR API KEY>`は環境によって異なります。
 
 ```shell
-curl -fsSL https://mackerel.io/file/script/amznlinux/setup-all-yum-v2.sh | MACKEREL_APIKEY='<YOUR API KEY>' sh
+curl -fsSL https://mackerel.io/file/script/setup-all-yum-v2.sh | MACKEREL_APIKEY='<YOUR API KEY>' sh
 ```
 
 コピーしたインストールコマンドをターミナル上で実行します。
@@ -49,8 +49,6 @@ curl -fsSL https://mackerel.io/file/script/amznlinux/setup-all-yum-v2.sh | MACKE
 インストールが正常に行なえない場合、以下などに該当していないかご確認ください。
 
 ### 異なるOSのインストールコマンドを実行してしまった場合
-
-Amazon Linux環境に CentOS / RedHat のインストールコマンドを実行してしまった場合は、mackerel-agentのアンインストールとリポジトリの削除を行い、改めて正しいインストールスクリプトを実行する必要があります。
 
 アンインストールの一連の手順は以下を実行してください。
 
