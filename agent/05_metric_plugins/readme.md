@@ -55,31 +55,16 @@ viなどのエディタで開いて以下の2行を追記しても構いませ�
 command = "mackerel-plugin-linux"
 ```
 
-特にエラーなどが発生せず、再びコマンドが入力できる状態になっていれば成功です。（完了メッセージなどは表示されません）
+特にエラーなどが発生せず、再びコマンドが入力できる状態になっていれば成功です。（完了メッセージも表示されません）
 
-mackerel-agent.conf を変更した際に有効なシンタックスチェック機能がmackerel-agentには備わっています。次のコマンドを実行してみましょう。
+確認して問題なければ、設定内容のシンタックスチェックを行い mackerel-agent を再起動します。
 
 ```shell
 mackerel-agent configtest
-```
-
-次のような結果が出力されていれば記載ミスなどがないことを確認できます。
-
-```
-SUCCESS (/etc/mackerel-agent/mackerel-agent.conf)
-```
-
-問題なければ、以下のコマンドにより mackerel-agent を再起動します。
-
-```shell
 sudo systemctl restart mackerel-agent
 ```
 
-systemctl コマンドで mackerel-agent が起動していることを確認しましょう。
-
-```shell
-systemctl status mackerel-agent
-```
+コマンド実行後、`[ OK ]`と表示されていれば起動成功です。
 
 ### プラグインを手動で実行してみる
 
