@@ -39,6 +39,53 @@ Mackerelではホスト1台1台を管理・監視するのではなく、適切�
 
 これでサービス／ロールにホストが追加されました。少し時間をおいてロールグラフを確認してみます。
 
+## 補足：設定ファイルでサービス／ロールの作成と紐付けを行う
+
+設定ファイル `/etc/mackerel-agent/mackerel-agent.conf` に設定を追記することで、ホストをサービス／ロールに紐付けることもできます。
+
+以下のコマンドをターミナルで実行することで追記できます。
+
+```shell
+sudo sh << SCRIPT
+cat >>/etc/mackerel-agent/mackerel-agent.conf <<'EOF';
+
+roles = ["blog:web"]
+EOF
+SCRIPT
+```
+
+特にエラーなどが発生せず、再びコマンドが入力できる状態になっていれば成功です。（完了メッセージなどは表示されません）
+
+viなどのエディタで開いて以下の行を追記しても構いません。
+
+```toml
+roles = ["blog:web"]
+```
+
+mackerel-agent.conf を変更した際に有効なシンタックスチェック機能がmackerel-agentには備わっています。次のコマンドを実行してみましょう。
+
+```shell
+mackerel-agent configtest
+```
+
+次のような結果が出力されていれば記載ミスなどがないことを確認できます。
+
+```
+SUCCESS (/etc/mackerel-agent/mackerel-agent.conf)
+```
+
+問題なければ、以下のコマンドにより mackerel-agent を再起動します。
+
+```shell
+sudo systemctl restart mackerel-agent
+```
+
+systemctl コマンドで mackerel-agent が起動していることを確認しましょう。
+
+```shell
+systemctl status mackerel-agent
+```
+
 ## ロールグラフを確認する
 
 [サービス](https://mackerel.io/my/services)から再びロールグラフを表示してみます。
