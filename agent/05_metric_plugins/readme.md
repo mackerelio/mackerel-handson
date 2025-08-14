@@ -18,7 +18,7 @@ sudo yum install -y mackerel-agent-plugins
 完了したら、インストールされたプラグインを見てましょう。
 
 ```shell
-ls -l /usr/bin/mackerel-plugin-*
+ls /usr/bin/mackerel-plugin-*
 ```
 
 50を超えるプラグインがインストールされていることを確認していただけるかと思います！
@@ -63,8 +63,6 @@ command = "mackerel-plugin-linux"
 mackerel-agent configtest
 sudo systemctl restart mackerel-agent
 ```
-
-コマンド実行後、`[ OK ]`と表示されていれば起動成功です。
 
 ### プラグインを手動で実行してみる
 
