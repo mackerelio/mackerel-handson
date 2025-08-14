@@ -18,7 +18,7 @@ sudo yum install -y mackerel-check-plugins
 完了したら、インストールされたプラグインを見てましょう。
 
 ```shell
-ls -l /usr/bin/check-*
+ls /usr/bin/check-*
 ```
 
 30近いプラグインがインストールされていることを確認していただけるかと思います！
@@ -38,7 +38,7 @@ ls -l /usr/bin/check-*
 以下のコマンドでhttpdをインストールして特に設定などはせずにそのまま起動します。
 
 ```shell
-sudo yum install httpd
+sudo yum install -y httpd
 sudo systemctl start httpd
 ```
 
@@ -46,13 +46,12 @@ sudo systemctl start httpd
 
 ```shell
 ps aux | grep httpd
-root      3918  0.6  0.9 255220  9296 ?        Ss   03:52   0:00 /usr/sbin/httpd -DFOREGROUND
-apache    3919  0.0  0.6 306576  6308 ?        Sl   03:52   0:00 /usr/sbin/httpd -DFOREGROUND
-apache    3920  0.0  0.6 306576  6308 ?        Sl   03:52   0:00 /usr/sbin/httpd -DFOREGROUND
-apache    3921  0.0  0.6 306576  6308 ?        Sl   03:52   0:00 /usr/sbin/httpd -DFOREGROUND
-apache    3922  0.0  0.6 536016  6308 ?        Sl   03:52   0:00 /usr/sbin/httpd -DFOREGROUND
-apache    3923  0.0  0.6 306576  6308 ?        Sl   03:52   0:00 /usr/sbin/httpd -DFOREGROUND
-ec2-user  3967  0.0  0.0 119436   936 pts/0    S+   03:52   0:00 grep --color=auto httpd
+root        5339  0.6  0.5  18388 11112 ?        Ss   10:14   0:00 /usr/sbin/httpd -DFOREGROUND
+apache      5512  0.0  0.2  18044  4628 ?        S    10:14   0:00 /usr/sbin/httpd -DFOREGROUND
+apache      5513  0.0  0.4 1708664 8260 ?        Sl   10:14   0:00 /usr/sbin/httpd -DFOREGROUND
+apache      5514  0.0  0.4 1544760 8032 ?        Sl   10:14   0:00 /usr/sbin/httpd -DFOREGROUND
+apache      5516  0.0  0.4 1544760 8024 ?        Sl   10:14   0:00 /usr/sbin/httpd -DFOREGROUND
+mackere+   20875  0.0  0.1 222316  2200 pts/0    S+   10:14   0:00 grep --color=auto httpd
 ```
 
 mackerel-agentの設定ファイル `/etc/mackerel-agent/mackerel-agent.conf` に設定を2行追記します。
@@ -85,8 +84,6 @@ mackerel-agent configtest
 sudo systemctl restart mackerel-agent
 ```
 
-コマンド実行後、`[ OK ]`と表示されていれば起動成功です。
-
 ## プラグインを手動で実行してみる
 
 以下のコマンドにより実行してみて、どのような結果が得られるか確認してみましょう。
@@ -95,11 +92,11 @@ sudo systemctl restart mackerel-agent
 check-procs --pattern httpd
 ```
 
-以下のような結果が表示されればプラグインが正常に実行され、結果の1行目に`Procs OK`とある様にプロセスが正常に稼働している事が確認できます。
+以下のような結果が表示されればプラグインが正常に実行され、結果の1行目に`Procs OK`とあるようにプロセスが正常に稼働していることが確認できます。
 
 ```shell
 Procs OK:
-Found 6 matching processes; cmd /httpd/
+Found 5 matching processes; cmd /httpd/
 ```
 
 チェックプラグインはコマンドを実行した終了ステータスで監視結果を表現します。check-procsコマンドを実行した直後に次のように終了ステータスを確認すると`0`となっていることがわかります。
@@ -126,7 +123,7 @@ Monitors に`proc_httpd`が追加されていることが確認できます。�
 sudo systemctl stop httpd
 ```
 
-アラートが発報される前に手動でプラグインを実行して監視結果がどの様に変化するか確認してみます。
+アラートが発報される前に手動でプラグインを実行して監視結果がどのように変化するか確認してみます。
 
 ```shell
 check-procs --pattern httpd
