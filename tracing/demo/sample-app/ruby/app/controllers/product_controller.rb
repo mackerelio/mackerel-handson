@@ -1,6 +1,6 @@
 class ProductController < ApplicationController
   def index
-    products = Product.includes(:category).order("RANDOM()").limit(100)
+    products = Product.includes(:category).all.sample(100)
 
     results = products.map do |product|
       {
