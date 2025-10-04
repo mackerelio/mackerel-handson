@@ -27,10 +27,6 @@ class ProductController < ApplicationController
         sleep(n)
         span.set_attribute(OpenTelemetry::SemanticConventions::Trace::CODE_FUNCTION, __method__.to_s)
         span.set_attribute('sleep.time', n)
-
-        if n > 2
-          raise "Sleep time is too long: #{n}"
-        end
       end
     end
 end
