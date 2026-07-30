@@ -1,4 +1,4 @@
-FROM ruby:4.0.5-slim
+FROM ruby:4.0.6-slim
 
 RUN apt-get update -qq && apt-get install -y build-essential libmariadb-dev-compat libmariadb-dev libyaml-dev
 
