@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 8.0.1"
+gem "rails", "~> 8.1.0"
 # Use sqlite3 as the database for Active Record
 gem "sqlite3", ">= 2.1"
 # Use the Puma web server [https://github.com/puma/puma]
@@ -25,6 +25,6 @@ gem "faker", "~> 3.5"
 gem "mysql2", "~> 0.5"
 
 gem "opentelemetry-sdk", "~> 1.6"
-gem "opentelemetry-instrumentation-all", "~> 0.72.0"
+gem "opentelemetry-instrumentation-all", "~> 0.94.0"
 
-gem "opentelemetry-exporter-otlp", "~> 0.29.1"
+gem "opentelemetry-exporter-otlp", "~> 0.34.0"
